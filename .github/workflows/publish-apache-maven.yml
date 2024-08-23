@@ -41,7 +41,7 @@ jobs:
         gpg-passphrase: ${{ secrets.MAVEN_GPG_PASSPHRASE_APARNA }}
 
     - name: Publish to Apache Maven Central
-      run: mvn deploy -P central
+      run: mvn deploy
       env:
         MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
         MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN_APARNA }}
