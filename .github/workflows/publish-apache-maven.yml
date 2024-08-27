@@ -34,7 +34,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: '11'
-        server-id: 'maven'
+        server-id: central
         server-username: ${{ secrets.MAVEN_USERNAME }}
         server-password: ${{ secrets.MAVEN_CENTRAL_TOKEN_APARNA }}
         gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY_APARNA }}
@@ -43,6 +43,6 @@ jobs:
     - name: Publish to Apache Maven Central
       run: mvn deploy
       env:
-        MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-        MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN_APARNA }}
+        MAVEN_USERNAME: KPITZtZH
+        MAVEN_CENTRAL_TOKEN: 0AcBJ006VqAqDJ5S/9hyRpP9KfsDj+RMorufAoIyEeL4
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE_APARNA }}
