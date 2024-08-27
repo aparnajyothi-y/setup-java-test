@@ -149,4 +149,15 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<distributionManagement>
+    <repository>
+        <id>releases</id>
+        <url>https://github.com/aparnajyothi-y/setup-java-test</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshots</id>
+        <url>https://github.com/aparnajyothi-y/setup-java-test</url>
+    </snapshotRepository>
+</distributionManagement>
 </project>
