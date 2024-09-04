@@ -17,6 +17,7 @@ jobs:
           java-version: '21.0.1'
           distribution: 'microsoft'
           java-package: 'jdk'
+          cache: 'sbt'
 
       - name: Verify Java version
         run: java -version
