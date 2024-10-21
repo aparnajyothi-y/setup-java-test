@@ -14,15 +14,9 @@ jobs:
       - name: Set up JDK 8
         uses: actions/setup-java@v4
         with:
-          java-version: '8.432.06'
+          java-version: '8'
           distribution: 'corretto'
           cache: 'maven'
-
-      - name: Setup Java Again
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'corretto'
-          java-version: '8.432.06'
 
       - name: Verify Java version
         run: java -version
