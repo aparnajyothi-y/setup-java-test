@@ -12,18 +12,30 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 8
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'corretto'
           cache: 'maven'
 
+      - name: Setup Java Again
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '8'
+
       - name: Set up JDK 17
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'corretto'
           cache: 'maven'
+
+      - name: Setup Java Again
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '17'
 
       - name: Verify Java version
         run: java -version
