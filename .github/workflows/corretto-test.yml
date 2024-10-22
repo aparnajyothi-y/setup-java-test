@@ -13,7 +13,7 @@ jobs:
 
       
       - name: Setup Java 
-        uses: actions/setup-java@v4
+        uses: aparnajyothi-y/setup-java@grralvm-fix
         with:
           distribution: 'corretto'
           java-version: '8'
@@ -23,7 +23,7 @@ jobs:
           ls -la $RUNNER_TOOL_CACHE/Java_Corretto_jdk/
 
       - name: Setup Java Again
-        uses: actions/setup-java@v4
+        uses: aparnajyothi-y/setup-java@grralvm-fix
         with:
           distribution: 'corretto'
           java-version: '8'
