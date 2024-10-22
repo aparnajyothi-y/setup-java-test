@@ -16,7 +16,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
-          java-version: '8.0'
+          java-version: '8.432.06-1'
       
       - name: Check Runner ToolCache
         run: |
@@ -26,5 +26,5 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'corretto'
-          java-version: '8'
+          java-version: '8.432.06-1'
       
