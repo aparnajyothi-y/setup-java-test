@@ -15,8 +15,8 @@ jobs:
         uses: aparnajyothi-y/setup-java@grralvm-fix
         with:
           distribution: 'corretto'
-          java-version: '8'
-          overwrite-settings: true
+          java-version: '8.202.08.2'
+          
       
       - name: Check Runner ToolCache
         run: |
@@ -26,5 +26,5 @@ jobs:
         uses: aparnajyothi-y/setup-java@grralvm-fix
         with:
           distribution: 'corretto'
-          java-version: '8'
-          overwrite-settings: true
+          java-version: '8.202.08.2'
+         
