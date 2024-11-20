@@ -14,17 +14,7 @@ jobs:
       - name: Setup Java 
         uses: aparnajyothi-y/setup-java@grralvm-fix
         with:
-          distribution: 'corretto'
-          java-version: '8.202.08.2'
+          distribution: 'temurin'
+          java-version: '17'
           
-      
-      - name: Check Runner ToolCache
-        run: |
-          ls -la $RUNNER_TOOL_CACHE/Java_Corretto_jdk/
-          
-      - name: Setup Java Again
-        uses: aparnajyothi-y/setup-java@grralvm-fix
-        with:
-          distribution: 'corretto'
-          java-version: '8.202.08.2'
-         
+
