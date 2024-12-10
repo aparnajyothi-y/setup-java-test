@@ -15,7 +15,7 @@ jobs:
   
       # Step 3: Set up Java with the normalized versions from the 'hidden' input
       - name: Set up Java
-        uses: gmitch215/setup-java@main
+        uses: actions/setup-java@v5
         with:
           distribution: 'jetbrains'
           java-package: jre+ft
