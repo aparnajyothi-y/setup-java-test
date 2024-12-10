@@ -17,7 +17,7 @@ jobs:
       - name: Set up Java
         uses: gmitch215/setup-java@main
         with:
-          java-version: '11.0.10'  # Normalized version from '11_0_10b1145.115'
+          java-version: '11_0_10'  # Normalized version from '11_0_10b1145.115'
           distribution: 'jetbrains'  # You can use other distributions, e.g., 'zulu', 'temurin', etc.
 
     
