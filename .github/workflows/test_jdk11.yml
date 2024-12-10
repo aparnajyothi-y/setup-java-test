@@ -1,0 +1,23 @@
+name: Test Java Version 11 jetbrains
+
+on:
+ workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+  
+      # Step 3: Set up Java with the normalized versions from the 'hidden' input
+      - name: Set up Java
+        uses: gmitch215/setup-java@main
+        with:
+          java-version: '11.0.10'  # Normalized version from '11_0_10b1145.115'
+          distribution: 'jetbrains'  # You can use other distributions, e.g., 'zulu', 'temurin', etc.
+
+    
