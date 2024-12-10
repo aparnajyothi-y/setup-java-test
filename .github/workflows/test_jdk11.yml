@@ -19,5 +19,5 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-package: jre+ft
-          version: '11'
+          java-version: '11'
     
