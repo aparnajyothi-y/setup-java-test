@@ -22,3 +22,5 @@ jobs:
         with:
           distribution: 'jetbrains'
           java-version: ${{ matrix.java_version }}
+          java-package: jre+ft
+
