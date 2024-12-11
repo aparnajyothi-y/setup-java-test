@@ -1,23 +1,25 @@
-name: Test Java Version 11 jetbrains
+name: Test Java Version 11 JetBrains
 
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        java_version: ['11.0.10', '11.0.11']
+      
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
-  
-      # Step 3: Set up Java with the normalized versions from the 'hidden' input
-      - name: Set up Java
+      # Step 2: Set up Java with the JetBrains distribution for both versions
+      - name: Set up Java ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
           distribution: 'jetbrains'
           java-package: jre+ft
-          java-version: '11'
-    
+          java-version: ${{ matrix.java_version }}
