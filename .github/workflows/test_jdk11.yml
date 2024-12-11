@@ -18,7 +18,7 @@ jobs:
 
       # Step 2: Set up Java with the JetBrains distribution for both versions
       - name: Set up Java ${{ matrix.java_version }}
-        uses: actions/setup-java@v4
+        uses:  gmitch215/setup-java@main
         with:
           distribution: 'jetbrains'
           java-package: jre+ft
