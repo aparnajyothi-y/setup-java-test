@@ -1,0 +1,29 @@
+name: Test Setup Java with .tool-versions
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  setup-java:
+    runs-on: ubuntu-latest  # Change to macos-latest or windows-latest if testing on other platforms
+
+    steps:
+      # Checkout the repository to make .tool-versions accessible
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Create the .tool-versions file with the specified version
+      - name: Create .tool-versions file
+        run: |
+          echo "java temurin-21.0.5+11.0.LTS" > .tool-versions
+
+      # Use setup-java action to set up Java
+      - name: Set up Java using actions/setup-java@v4.6.0
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version-file: ".tool-versions"
+
+      # Check Java version after setup
+      - name: Verify Java version
+        run: java -version
