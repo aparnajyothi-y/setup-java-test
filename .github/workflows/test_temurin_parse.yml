@@ -16,9 +16,15 @@ jobs:
       - name: Create .tool-versions file
         run: |
           echo "java temurin-21.0.5+11.0.LTS" > .tool-versions
+          cat .tool-versions  # Output the contents to verify it's created correctly
+
+      # Debug the .tool-versions file
+      - name: Verify .tool-versions file contents
+        run: cat .tool-versions
 
       # Use setup-java action to set up Java
       - name: Set up Java using actions/setup-java@v4.6.0
+        id: setup-java
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
@@ -27,3 +33,10 @@ jobs:
       # Check Java version after setup
       - name: Verify Java version
         run: java -version
+
+      # Debugging the version from setup-java by checking the installation path
+      - name: Debug setup-java output
+        run: |
+          echo "Java home directory: $JAVA_HOME"
+          echo "Java version from setup-java:"
+          $JAVA_HOME/bin/java -version
