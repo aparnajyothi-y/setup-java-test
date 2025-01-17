@@ -10,7 +10,7 @@ jobs:
     steps:
       # Checkout the repository to make .tool-versions accessible
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Create the .tool-versions file with the specified version
       - name: Create .tool-versions file
