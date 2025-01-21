@@ -12,18 +12,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Create the .tool-versions file with the specified version
-      - name: Create .tool-versions file
+      - name: Create .tool-versions file with random version
         run: |
-          echo "java temurin-21.0.5+11.0.LTS" > .tool-versions
-          cat .tool-versions  # Output the contents to verify it's created correctly
+          # Define an array of possible versions
+          versions=(
+            "temurin-21.0.5+11.0.LTS"
+            "oracle-17.0.1"
+            "corretto-11.0.9.1"
+            "openjdk-8.0.292+10"
+            "graalvm-19.3.0"
+            "zulu-16.0.0.24"
+            "redhat-11.0.8.10"
+            "temurin-11.0.12+7.LTS"
+            "temurin-8.0.292+5"
+            "openjdk-16.0.2+7"
+            "temurin-14.0.2+12"
+          )
+      
+          # Get a random index
+          random_version=${versions[$RANDOM % ${#versions[@]}]}
+      
+          # Create the .tool-versions file with the random version
+          echo "java $random_version" > .tool-versions
+      
+          # Output the contents to verify it's created correctly
+          cat .tool-versions
+
 
       # Debug the .tool-versions file
       - name: Verify .tool-versions file contents
         run: cat .tool-versions
 
       # Use setup-java action to set up Java
-      - name: Set up Java using actions/setup-java@v4.6.0
+      - name: Set up Java using aparnajyothi-y/setup-java@update-regex-toolversion
         id: setup-java
         uses: aparnajyothi-y/setup-java@update-regex-toolversion
         with:
