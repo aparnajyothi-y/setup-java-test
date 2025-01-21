@@ -1,10 +1,10 @@
 # java temurin-21.0.5+11.0.LTS
 
 # Example 1: Temurin (Adoptium)
-java temurin-21.0.5+11.0.LTS
+# java temurin-21.0.5+11.0.LTS
 
 # Example 2: Oracle JDK (specific version)
-# java oracle-17.0.1
+  java oracle-17.0.1
 
 # Example 3: Amazon Corretto (specific version)
 # java corretto-11.0.9.1
