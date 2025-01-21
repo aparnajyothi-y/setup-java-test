@@ -1,4 +1,4 @@
-name: Test Setup Java with .tool-versions
+name: Test corretto Setup Java with .tool-versions
 
 on: 
   workflow_dispatch:
@@ -18,7 +18,7 @@ jobs:
         id: setup-java
         uses: aparnajyothi-y/setup-java@update-regex-toolversion
         with:
-          distribution: "oracle"
+          distribution: "corretto"
           java-version-file: ".tool-versions"
 
       # Check Java version after setup
