@@ -18,7 +18,7 @@ jobs:
         id: setup-java
         uses: aparnajyothi-y/setup-java@update-regex-toolversion
         with:
-          distribution: "temurin"
+          distribution: "oracle"
           java-version-file: ".tool-versions"
 
       # Check Java version after setup
