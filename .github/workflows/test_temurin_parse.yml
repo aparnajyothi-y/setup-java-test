@@ -12,29 +12,29 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Read the distribution and version from the .tool-versions file
-      - name: Read Java version from .tool-versions file
-        id: read-version
-        run: |
-          # Extract distribution and version from the .tool-versions file
-          version_line=$(cat .tool-versions | grep java)
-          # Extract distribution and version from the line using regex
-          distribution=$(echo $version_line | awk '{print $2}' | cut -d'-' -f1)
-          version=$(echo $version_line | awk '{print $2}' | cut -d'-' -f2-)
+      # # Read the distribution and version from the .tool-versions file
+      # - name: Read Java version from .tool-versions file
+      #   id: read-version
+      #   run: |
+      #     # Extract distribution and version from the .tool-versions file
+      #     version_line=$(cat .tool-versions | grep java)
+      #     # Extract distribution and version from the line using regex
+      #     distribution=$(echo $version_line | awk '{print $2}' | cut -d'-' -f1)
+      #     version=$(echo $version_line | awk '{print $2}' | cut -d'-' -f2-)
 
-          echo "Distribution: $distribution"
-          echo "Version: $version"
+      #     echo "Distribution: $distribution"
+      #     echo "Version: $version"
 
-          # Set output values for distribution and version
-          echo "::set-output name=distribution::$distribution"
-          echo "::set-output name=version::$version"
+      #     # Set output values for distribution and version
+      #     echo "::set-output name=distribution::$distribution"
+      #     echo "::set-output name=version::$version"
 
       # Use setup-java action to set up Java using the extracted distribution and version
       - name: Set up Java using aparnajyothi-y/setup-java@update-regex-toolversion
         id: setup-java
-        uses: actions/setup-java@main
+        uses: aparnajyothi-y/setup-java@update-regex-toolversion
         with:
-          distribution: ${{ steps.read-version.outputs.distribution }}
+          distribution: temurin
           java-version-file: ".tool-versions"
 
       # Check Java version after setup
