@@ -36,6 +36,7 @@ jobs:
         with:
           distribution: temurin
           java-version-file: ".tool-versions"
+          check-latest: true
 
       # Check Java version after setup
       - name: Verify Java version
