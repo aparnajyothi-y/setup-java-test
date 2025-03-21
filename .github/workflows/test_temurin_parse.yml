@@ -34,7 +34,6 @@ jobs:
         id: setup-java
         uses: aparnajyothi-y/setup-java@tool-versions
         with:
-          distribution: temurin
           java-version-file: ".tool-versions"
           check-latest: true
 
