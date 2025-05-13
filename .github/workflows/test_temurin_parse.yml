@@ -5,14 +5,11 @@ on:
 
 jobs:
   setup-java:
-    runs-on: ubuntu-latest  # Change to macos-latest or windows-latest if testing on other platforms
+    runs-on: ubuntu-latest  
 
     steps:
-      # Checkout the repository to make .tool-versions accessible
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      # # Read the distribution and version from the .tool-versions file
       # - name: Read Java version from .tool-versions file
       #   id: read-version
       #   run: |
@@ -32,10 +29,11 @@ jobs:
       # Use setup-java action to set up Java using the extracted distribution and version
       - name: Set up Java using aparnajyothi-y/setup-java@update-regex-toolversion
         id: setup-java
-        uses: aparnajyothi-y/setup-java@tool-versions
+        # uses: aparnajyothi-y/setup-java@tool-versions
+        uses: actions/setup-java@V4
         with:
           distribution : temurin
-          java-version : 21.0.5+11.0.LTS
+          # java-version : 21.0.5+11.0.LTS
           check-latest: true
 
       # Check Java version after setup
