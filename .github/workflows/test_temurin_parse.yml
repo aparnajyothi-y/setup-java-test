@@ -33,16 +33,10 @@ jobs:
         uses: actions/setup-java@V4
         with:
           distribution : temurin
+          java-version-file: ".tool-versions"
           # java-version : 21.0.5+11.0.LTS
-          check-latest: true
+          # check-latest: true
 
       # Check Java version after setup
       - name: Verify Java version
         run: java -version
-
-      # Debugging the version from setup-java by checking the installation path
-      - name: Debug setup-java output
-        run: |
-          echo "Java home directory: $JAVA_HOME"
-          echo "Java version from setup-java:"
-          $JAVA_HOME/bin/java -version
