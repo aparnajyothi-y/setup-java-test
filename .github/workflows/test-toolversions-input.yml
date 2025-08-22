@@ -16,7 +16,6 @@ jobs:
           - "graalvm-21.0.2"
           - "temurin-21.0.5+11.0.LTS"
           - "temurin-21.0.6+7.0.LTS"
-          - "jdk-21.0.6+7"
     steps:
       - uses: actions/checkout@v4
       - name: Create .tool-versions
