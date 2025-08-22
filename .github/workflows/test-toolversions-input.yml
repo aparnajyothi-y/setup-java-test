@@ -1,0 +1,38 @@
+name: ASDF .tool-versions Parsing
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-setup-java-asdf-positive:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["macos-13","macos-latest","ubuntu-latest","ubuntu-22.04-arm","windows-latest"]
+        version_line:
+          - "corretto-11.0.28+6.1"
+          - "zulu-21.0.8+9"
+          - "graalvm-21.0.4+8.1"
+          - "temurin-21.0.5+11.0.LTS"
+          - "temurin-21.0.6+7"
+          - "adoptopenjdk-21.0.6+7.0.LTS"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create .tool-versions
+        run: |
+          echo "java ${{ matrix.version_line }}" > .tool-versions
+      
+      - name: Extract distribution
+        id: extract
+        shell: bash
+        run: |
+          version_line="${{ matrix.version_line }}"
+          distribution="${version_line%%-*}"
+          echo "distribution=$distribution" >> $GITHUB_OUTPUT
+      - uses: aparnajyothi-y/setup-java@toolversions-regex-update # Assuming the PR branch is checked out in the action
+        with:
+          distribution: ${{ steps.extract.outputs.distribution }}
+          java-version-file: ".tool-versions"
+      - name: Validate Java Version
+        run: java -version
