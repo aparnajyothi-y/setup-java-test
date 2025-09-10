@@ -1,0 +1,26 @@
+name: Debug punycode warning
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-setup-java:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable module debug
+        run: echo "NODE_DEBUG=module" >> $GITHUB_ENV
+
+      - name: Run setup-java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+  test-checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enable module debug
+        run: echo "NODE_DEBUG=module" >> $GITHUB_ENV
+
+      - name: Run checkout
+        uses: actions/checkout@v4
