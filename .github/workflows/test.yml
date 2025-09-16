@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Set up JDK 17
-        uses: aparnajyothi-y/setup-java@fix-punycode-warn
+        uses: aparnajyothi-y/setup-java@fix-punycode-warning-deprication
         with:
           java-version: '17'
           distribution: 'temurin'
