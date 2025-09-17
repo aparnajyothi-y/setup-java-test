@@ -33,7 +33,7 @@ jobs:
         # uses: actions/setup-java@V5
         with:
           distribution : temurin
-          java-version-file: ".tool-version"
+          java-version-file: ".tool-versions"
           # java-version : 21.0.5+11.0.LTS
           # check-latest: true
 
