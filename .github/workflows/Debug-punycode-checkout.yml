@@ -11,7 +11,7 @@ jobs:
         run: echo "NODE_DEBUG=module" >> $GITHUB_ENV
 
       - name: Run setup-java
-        uses: actions/setup-java@v4
+        uses: aparnajyothi-y/setup-java@punycode-warning-suppress
         with:
           distribution: temurin
           java-version: '17'
