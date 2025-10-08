@@ -18,7 +18,6 @@ jobs:
           java-version: 25
           cache: maven
           cache-dependency-path: pom.xml
-          cache-key: setup-java-Linux-x64-maven-80603dcdd65a520fae049babd82899c3be4744177c2a5eb9d9b30f0b5200ee00
 
       - name: Verify Java
         run: |
