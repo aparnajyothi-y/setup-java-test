@@ -1,22 +1,31 @@
-name: Repro Cached JDK25 Temurin Issue
+name: Repro cached JDK25 issue
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup Java 25 Temurin with Gradle cache
-        uses: actions/setup-java@v5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java 25 (Temurin)
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 25
           cache: gradle
 
-      - name: Verify Java version
+      - name: Verify Java
         run: |
+          echo "JAVA_HOME=$JAVA_HOME"
           java -version
-          javac -version
+          which java
+          ls -la "$JAVA_HOME/bin"
+
+      - name: Run Gradle build
+        run: ./gradlew clean build --no-daemon
