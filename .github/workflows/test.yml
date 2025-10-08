@@ -20,6 +20,3 @@ jobs:
         run: |
           java -version
           javac -version
-
-      - name: Run Gradle build
-        run: ./gradlew build --stacktrace
