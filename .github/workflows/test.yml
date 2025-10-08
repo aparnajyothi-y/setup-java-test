@@ -2,8 +2,6 @@ name: Repro cached JDK25 issue
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
 
 jobs:
   build:
@@ -18,7 +16,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 25
-          cache: gradle
+          cache: maven
 
       - name: Verify Java
         run: |
@@ -27,5 +25,5 @@ jobs:
           which java
           ls -la "$JAVA_HOME/bin"
 
-      - name: Run Gradle build
-        run: ./gradlew clean build --no-daemon
+      - name: Run Maven build
+        run: mvn clean install -B
