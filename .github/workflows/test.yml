@@ -37,6 +37,7 @@ jobs:
           tar -xzf $FRESH_DIR/jdk25.tar.gz -C $FRESH_DIR --strip-components=1
           echo "Listing files in fresh JDK..."
           ls -lR $FRESH_DIR
+
       # Step 3: Compare cached vs fresh JDK checksums
       - name: Compare cached vs fresh JDK
         run: |
