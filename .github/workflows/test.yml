@@ -1,22 +1,18 @@
-name: test
+name: Repro Cached JDK25 Issue
 
 on:
   workflow_dispatch:
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      - uses: actions/checkout@v5
-      - name: Set up JDK 17
-        uses: aparnajyothi-y/setup-java@fix-punycode-warning-deprication
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-        
+      - name: Checkout
+        uses: actions/checkout@v4
 
-     
+      - name: Setup Java 25 Temurin with cache
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 25
+          cache: gradle
