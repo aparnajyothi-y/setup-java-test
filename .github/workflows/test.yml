@@ -27,18 +27,16 @@ jobs:
           echo "Computing SHA-256 checksums for cached JDK..."
           find $JAVA_HOME -type f -exec sha256sum {} \; > cached-jdk.sha256
 
-      # Step 2: Download fresh JDK25 in a separate folder (non-cached)
       - name: Download fresh JDK25 Temurin
         run: |
           FRESH_DIR="$RUNNER_TEMP/fresh-jdk25"
           mkdir -p $FRESH_DIR
+          echo "Downloading fresh JDK25..."
           curl -L -o $FRESH_DIR/jdk25.tar.gz https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.0+36/OpenJDK25U-jdk_x64_linux_hotspot_25.0.0_36.tar.gz
+          echo "Extracting JDK25..."
           tar -xzf $FRESH_DIR/jdk25.tar.gz -C $FRESH_DIR --strip-components=1
-          echo "Listing all files in fresh JDK..."
-          ls -lR $FRESH_DIR > fresh-jdk-files.txt
-          echo "Computing SHA-256 checksums for fresh JDK..."
-          find $FRESH_DIR -type f -exec sha256sum {} \; > fresh-jdk.sha256
-
+          echo "Listing files in fresh JDK..."
+          ls -lR $FRESH_DIR
       # Step 3: Compare cached vs fresh JDK checksums
       - name: Compare cached vs fresh JDK
         run: |
