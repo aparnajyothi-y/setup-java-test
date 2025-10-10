@@ -1,45 +1,41 @@
-name: Compare Cached vs Fresh JDK25
-
-on:
-  workflow_dispatch:
+name: Reproduce Cached Temurin 25 Issue
+on: [workflow_dispatch]
 
 jobs:
-  jdk-cache-check:
+  test-temurin-cache:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
-      # Step 1: Setup JDK25 with Maven cache (cached)
-      - name: Setup JDK25 Temurin with Maven cache
-        uses: actions/setup-java@v5
-        id: cached
+      # Step 1: Use setup-java with cache
+      - name: Setup Java 25 Temurin with cache
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 25
-          cache: maven
-          cache-dependency-path: pom.xml
+          cache: 'gradle'
 
-      - name: Inspect cached JDK
-        run: |
-          echo "Listing all files in cached JDK..."
-          ls -lR $JAVA_HOME > cached-jdk-files.txt
-          echo "Computing SHA-256 checksums for cached JDK..."
-          find $JAVA_HOME -type f -exec sha256sum {} \; > cached-jdk.sha256
+      - name: Verify Java version
+        run: java -version
 
-      - name: Download fresh JDK25 Temurin
-        run: |
-          FRESH_DIR="$RUNNER_TEMP/fresh-jdk25"
-          mkdir -p $FRESH_DIR
-          echo "Downloading fresh JDK25..."
-          curl -L -o $FRESH_DIR/jdk25.tar.gz https://github.com/adoptium/temurin25-binaries/releases/download/jdk-25.0.0+36/OpenJDK25U-jdk_x64_linux_hotspot_25.0.0_36.tar.gz
-          echo "Extracting JDK25..."
-          tar -xzf $FRESH_DIR/jdk25.tar.gz -C $FRESH_DIR --strip-components=1
-          echo "Listing files in fresh JDK..."
-          ls -lR $FRESH_DIR
+      # Step 2: Force cache reuse (simulate reused cache)
+      - name: Restore cached JDK manually
+        uses: actions/cache@v4
+        with:
+          path: /usr/lib/jvm/temurin-25-jdk-amd64
+          key: temurin25-cache-key-fixed
+          restore-keys: |
+            temurin25-cache-key-
 
-      # Step 3: Compare cached vs fresh JDK checksums
-      - name: Compare cached vs fresh JDK
+      # Step 3: Try running jlink to trigger verification
+      - name: Run jlink to trigger validation
         run: |
-          echo "Comparing cached and fresh JDK..."
-          diff cached-jdk.sha256 fresh-jdk.sha256 || echo "Differences detected - cached JDK is modified!"
+          jlink \
+            --add-modules java.base \
+            --output ./minimal-runtime
+
+      - name: Check integrity files
+        run: |
+          echo "Checking checksum of ct.sym..."
+          sha512sum /usr/lib/jvm/temurin-25-jdk-amd64/lib/ct.sym || true
