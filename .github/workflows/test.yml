@@ -16,8 +16,7 @@ jobs:
         with:
           distribution: temurin
           java-version: 25
-          cache: false   # Force fresh JDK download
-
+        
       - name: Verify JDK installation
         run: |
           echo "JAVA_HOME: $JAVA_HOME"
