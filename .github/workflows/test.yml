@@ -1,4 +1,4 @@
-name: Validate Non-Cached Temurin JDK25
+name: Validate Temurin JDK24
 
 on:
   workflow_dispatch:
