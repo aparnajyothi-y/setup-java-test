@@ -11,11 +11,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Java 25 Temurin (no cache)
+      - name: Setup Java 24 Temurin
         uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 24
+          cache: 'gradle'
         
       - name: Verify JDK installation
         run: |
