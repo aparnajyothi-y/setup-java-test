@@ -1,54 +1,43 @@
-name: Validate Temurin JDK24
 
-on:
-  workflow_dispatch:
+name: Reproduce Cached Temurin 25 Issue
+on: [workflow_dispatch]
 
 jobs:
-  validate-temurin-noncached:
+  test-temurin-cache:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Java 24 Temurin
+      # Step 1: Use setup-java with cache
+      - name: Setup Java 25 Temurin with cache
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 24
+          java-version: 25
           cache: 'gradle'
-        
-      - name: Verify JDK installation
-        run: |
-          echo "JAVA_HOME: $JAVA_HOME"
-          java -version
-          ls -lR $JAVA_HOME | head -30
 
-      - name: Compute SHA512 checksums for key files
-        run: |
-          echo "Computing SHA512 for critical JDK files..."
-          sha512sum $JAVA_HOME/lib/ct.sym || echo "ct.sym not found"
-          sha512sum $JAVA_HOME/lib/jrt-fs.jar || echo "jrt-fs.jar not found"
+      - name: Verify Java version
+        run: java -version
 
+      # Step 2: Force cache reuse (simulate reused cache)
+      - name: Restore cached JDK manually
+        uses: actions/cache@v4
+        with:
+          path: /usr/lib/jvm/temurin-25-jdk-amd64
+          key: temurin25-cache-key-fixed
+          restore-keys: |
+            temurin25-cache-key-
+      # Step 3: Try running jlink to trigger verification
       - name: Run jlink to trigger validation
         run: |
-          echo "Running jlink validation..."
-          jlink --version
-          jlink --list-plugins
-          echo "If you see no 'has been modified' errors, the non-cached JDK is valid."
-
-      - name: Capture JDK structure summary
+          jlink \
+            --add-modules java.base \
+            --output ./minimal-runtime
+      - name: Check integrity files
         run: |
-          echo "Capturing JDK directory summary..."
-          du -sh $JAVA_HOME
-          find $JAVA_HOME/lib -maxdepth 1 -type f
-
-      - name: Upload JDK info artifact (optional)
-        uses: actions/upload-artifact@v4
-        with:
-          name: temurin25-noncached-validation
-          path: |
-            $JAVA_HOME/lib/ct.sym
-            $JAVA_HOME/lib/jrt-fs.jar
+          echo "Checking checksum of ct.sym..."
+          sha512sum /usr/lib/jvm/temurin-25-jdk-amd64/lib/ct.sym || true
