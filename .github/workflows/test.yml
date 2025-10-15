@@ -14,10 +14,10 @@ jobs:
 
       # Step 1: Use setup-java with cache
       - name: Setup Java 25 Temurin with cache
-        uses: aparnajyothi-y/setup-java@fix-temurin25-validation-issue
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 25
+          java-version: 24
           cache: 'gradle'
 
       - name: Verify Java version
