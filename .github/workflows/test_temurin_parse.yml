@@ -32,7 +32,7 @@ jobs:
         uses: aparnajyothi-y/setup-java@toolversions-regex-update
         # uses: actions/setup-java@main
         with:
-          distribution : temurin
+          # distribution : temurin
           java-version-file: ".tool-versions"
           # java-version : 21.0.5+11.0.LTS
           # check-latest: true
