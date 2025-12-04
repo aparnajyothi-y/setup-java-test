@@ -29,7 +29,7 @@ jobs:
       # Use setup-java action to set up Java using the extracted distribution and version
       - name: Set up Java using aparnajyothi-y/setup-java@update-regex-toolversion
         id: setup-java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v5
         # uses: actions/setup-java@main
         with:
           distribution : temurin
