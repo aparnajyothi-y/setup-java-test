@@ -1,0 +1,23 @@
+name: Test setup java
+on: [workflow_dispatch]
+
+jobs:
+  test-temurin-cache:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Step 1: Use setup-java with cache
+      - name: Setup Java 25 Temurin with cache
+        uses:  salmanmkc/setup-java@upgrade-actions-cache-v5
+        with:
+          distribution: temurin
+          java-version: 25
+          
+
+      - name: Verify Java version
+        run: java -version
