@@ -13,7 +13,8 @@ jobs:
 
       # Step 1: Use setup-java with cache
       - name: Setup Java 25 Temurin with cache
-        uses:  salmanmkc/setup-java@upgrade-actions-cache-v5
+        # uses:  salmanmkc/setup-java@upgrade-actions-cache-v5
+        uses:  aparnajyothi-y/setup-java@upgrade-actions-cache-5.0.1
         # uses: actions/setup-java@v5
         with:
           distribution: temurin
